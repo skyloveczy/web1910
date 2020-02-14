@@ -1,0 +1,114 @@
+关于HEAD
+  HEAD其实就是一个存盘点,实现版本的控制
+  git将每一次的提交串成一条时间线,这条时间线就是一条分支
+  默认只有一条分支,master,也叫作主分支,而HEAD指向的就是当前所在分支
+
+  使用git reflog可以查看历史所有提交记录,包括回退操作
+
+
+分支的使用
+  1. 分支的创建
+    git branch 分支名称
+    将当前所在分支复制一条新的分支出来
+
+  2. 查看当前有哪些分支
+    git branch
+    前面有*的表示当前所在分支
+
+  3. 切换分支
+    git checkout 分支名
+    在一条分支上的修改,不会影响到其他分支上的数据
+
+    先查看本地仓库的状态,如果不是nothing to commit,则提交
+    修改1.txt的内容为 master的初始内容
+    提交
+    修改1.txt的内容为 master修改的内容
+    提交
+    创建分支test2
+    查看当前有哪些分支
+    查看提交记录
+    切换到test2上
+    查看所有分支
+    查看提交记录
+    修改1.txt的内容为 test2修改的数据
+    提交
+    查看提交记录
+    切换回master,查看1.txt是否发生变化
+    查看提交记录
+
+  4. 删除分支
+    git branch -d 分支名
+
+    git branch -D 分支名
+    不能删除当前所在分支
+
+  5. 合并分支
+    git merge 分支名
+    将指定名称的分支的内容合并到当前分支
+
+    在master分支上使用命令 git merge test1
+    将test1分支的内容合并到master分支上
+    master分支的内容发生变化,
+    test1分支的内容不会改变
+
+    分支合并的练习:
+      1. 创建一条新的分支,test3
+      2. 切换到test3,修改其中文件的内容,新建一个文件,提交
+      3. 回到master分支,将test3分支的内容合并进master
+      4. 查看master的内容
+
+
+github的使用
+  https://github.com
+
+  1. 创建远程仓库
+    点击右上角+
+    选择new repository
+    在repository name中填写远程仓库的名称(其他选项可以忽略)
+    点击create repository
+  
+  2. 将远程仓库与本地仓库关联 
+    使用命令行在本地仓库输入
+    git remote add origin 远程仓库的url
+
+    git remote add 固定语法 添加远程关联
+    origin 表示远程关联的代名词,指代后面的 远程仓库的url
+    
+  3. 将本地仓库的内容推送给远程仓库
+    git push -u origin master
+
+    git push 固定语法 推送
+    -u  在第一次推送给远程仓库时添加,以后就不需要再添加了
+    origin 关联时定义的代名词,表示关联时后面的 远程仓库的url
+    master 表示推送的分支
+
+  4. git remote
+    查看当前本地仓库有哪些远程关联
+
+  5. git remote remove 关联名称
+    删除指定名称的远程关联
+
+  6. 从远程仓库下载代码
+    1) download Zip
+
+    2) git clone方式
+      在命令行中使用该命令
+      git clone 远程仓库url
+      一般是在第一次使用,本机刚使用远程仓库内容时
+      下载下来的是一个完整的仓库,包含该仓库曾经所有的提交信息
+      同时,自动添加了远程关联
+    3) git pull 命令
+      git pull origin master
+      
+
+
+
+
+
+
+PS: 
+  git status和git add -A忽略空文件夹
+
+
+
+
