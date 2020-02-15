@@ -8,7 +8,8 @@ var server = http.createServer(function(req,res){
   // res.end("<h1 style='color:red;'>This is my first NodeJs Page</h1>");
 
   // 如果要返回中文,则需要设置响应头
-  res.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+  // res.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
+  res.setHeader("Content-Type","text/html;charset=utf-8");
   res.end("中文");
 });
 

@@ -15,7 +15,9 @@
       id_rsa.pub : 公钥,将其内容配置到github上
 
     打开公钥,复制里面的内容
-
+      右上角头像-->settings-->SSH And GPGKeys
+      -->右上角Add SSH
+      -->Title 填写配置名称(随便写) content中粘贴复制的内容
 
 
 
