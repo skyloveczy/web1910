@@ -65,3 +65,4 @@ PS:
       点击提交,发送regist请求
       服务器接收请求,解析数据,得到username和password的值
       将username作为文件名,password作为文件内容,保存在服务器中
+
