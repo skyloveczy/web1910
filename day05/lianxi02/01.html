@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">点击显示</button>
+  <div id="show">
+
+  </div>
+  <script src="jquery-3.2.1.min.js"></script>
+  <script src="template-native.js"></script>
+  <!-- 视图模板 -->
+  <script type="text/html" id="temp">
+    <ul>
+      <% for(var i=0;i<pics.length;i++){ %>
+        <li>
+          <img src="imgs/<%= pics[i] %>" alt="">
+        </li>
+      <% } %>
+    </ul>
+  </script>
+  <script>
+    $(function(){
+      $.ajax({
+        url:"/getpics",
+        success: function(result){
+          // result = JSON.parse(result);
+          result = result.split(",");
+          console.log(result);
+          var html = template("temp", {pics:result});
+          show.innerHTML = html;
+        }
+      })
+    })
+  </script>
+</body>
+</html>
