@@ -1,0 +1,30 @@
+4. fs模块
+  4.4 读取文件夹内容
+    fs.readdir(path,[option],function(err,files){})
+
+  4.5 判断文件或目录的性质
+    fs.stat(path,function(err,state){})
+
+
+  练习01:
+    读取文件夹下的内容,遍历判断,显示:
+      xxx是一个文件夹
+      xxx是一个文件
+      xxx是一个文件
+      xxx是一个文件夹
+
+
+
+
+
+
+一、模仿网页项目的访问
+  使用NodeJS写一个网站
+  包含index.html, index.js, index.css, xxx.jpg
+  访问localhost:4000
+  展示index.html,要求:能看到js效果,css样式,以及图片
+
+
+
+
+
