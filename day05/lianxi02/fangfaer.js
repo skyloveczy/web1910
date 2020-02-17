@@ -6,7 +6,7 @@ http.createServer(function(req,res){
 
   fs.readdir("./imgs",function(err,files){
     res.write("<img />");
-    res.end();
+    res.end("<img />");
   });
 
 }).listen(4000);
