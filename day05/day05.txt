@@ -3,7 +3,7 @@
     fs.readdir(path,[option],function(err,files){})
 
   4.5 判断文件或目录的性质
-    fs.stat(path,function(err,state){})
+    fs.stat(path,function(err,stats){})
 
 
   练习01:
