@@ -21,7 +21,7 @@ function delDir(path){
   fs.rmdirSync(path);
 }
 
-delDir("aa");
+exports.delDir = delDir;
 
 
 

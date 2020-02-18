@@ -44,3 +44,29 @@
 
     没有package.json,默认使用index.js作为对外接口文件
     如果有package.json并且已经设置了main属性,则以main为主
+
+    练习03:
+    
+    package.json生成的命令:　npm init -y
+
+    PS:
+      1) 在require时,表示当前路径的./不可省略
+         如果省略,系统会默认从一个特殊的文件夹中去查找对应的模块
+         node_modules
+      2) node_modules不一定在当前路径下,可以在当前路径的直接父级目录下
+      3) 引入js文件时,后缀名可以省略,但是不建议
+
+
+使用别人的模块
+  https://www.npmjs.com/
+
+  在使用npm install 模块名 或 npm i 模块名
+  该命令会自动将指定模块下载在当前路径下的node_modules文件夹里面
+  如果当前目录下没有node_modules文件夹,则会向上级目录逐级查找node_modules
+
+  使用silly-datetime格式化时间 04_sd.js
+
+  处理post请求传递的参数 05_form.js
+    在没有文件上传时, 使用req.on("data")和req.on("end")
+
+
