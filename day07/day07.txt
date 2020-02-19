@@ -1,0 +1,15 @@
+1. 使用formidable上传文件
+
+
+2. 模板引擎
+  前端的模板引擎: template.js
+    <% 逻辑代码块 %>
+    <%= 属性,变量 %>
+  
+  后端的模板引擎: jade(node默认模板引擎) , ejs
+
+  安装ejs模块
+    npm i ejs
+
+
+
