@@ -1,0 +1,21 @@
+1. photo案例
+  安装需要的模块:
+    ejs
+    express
+    body-parser
+    formidable
+    rimraf
+    silly-datetime
+
+  在photo根目录下新建public文件夹,将需要的公共资源文件放进去
+    bootstrap.css
+    jquery
+    img/1.jpg
+  
+  新建app.js,开启服务
+
+  1. 文件夹的显示,新建,与删除
+  2. 图片的显示,上传
+
+
+

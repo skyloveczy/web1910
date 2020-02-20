@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <style>
+    .photo{
+      padding-top: 40px;
+      padding-left: 200px;
+      padding-right: 200px;
+    }
+    .pics{
+      margin: 30px;
+      float: left;
+      /* border: 1px solid red; */
+    }
+    h3{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">相册</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">新建相册</a></li>
+          <li><a href="#">上传图片</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="photo">
+    <% for(var i=0;i<dirs.length;i++){ %>
+      <div class="pics">
+        <a href="/pic/show">
+          <img src="/img/1.jpg" alt="" width="150px">
+          <h3><%= dirs[i] %></h3>
+        </a>
+      </div>
+    <% } %>
+  </div>
+
+</body>
+</html>

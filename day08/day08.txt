@@ -24,6 +24,26 @@
       use("/",function) 处理所有的请求
       可以简写为 use(function)
 
+  end,send,render的区别
+    end
+      快速结束请求,返回响应
+      参数类型: String,Buffer
+      如果参数包含中文,会出现乱码情况
+      一般常用于测试
+    send
+      作用与end类似
+      参数类型: String,Buffer,json,Array
+      会自动设置MIME类型,避免中文乱码
+    render
+      res.render("视图名称",{填充的数据},function(err,html){});
+      视图名称默认从项目的根目录中的views文件夹中查找
+      也可以自定义查找的文件夹
+      app.set("views","自定义文件夹路径");
 
 
+  get请求的参数
+    /path/xxx?id=1&name=zs  ===> req.query
+  post请求的参数
+    有文件上传: formidable
+    没有文件上传: body-parser
 
