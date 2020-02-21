@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>在线相册</title>
+  <title>在线相册--<%= dirName %></title>
   <link rel="stylesheet" href="/css/bootstrap.css">
   <style>
     .photo{
@@ -37,12 +37,9 @@
   </nav>
 
   <div class="photo">
-    <% for(var i=0;i<dirs.length;i++){ %>
+    <% for(var i=0;i<pics.length;i++){ %>
       <div class="pics">
-        <a href="/pic/show?dirName=<%= dirs[i] %>">
-          <img src="/img/1.jpg" alt="" width="150px">
-          <h3><%= dirs[i] %></h3>
-        </a>
+          <img src="/<%=dirName%>/<%= pics[i] %>" width="150px">
       </div>
     <% } %>
   </div>

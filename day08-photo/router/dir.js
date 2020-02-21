@@ -8,7 +8,7 @@ const file = require("../model/file.js");
 // 处理的请求: /dir/show
 router.get("/show", function(req,res){
   // 读取uploads下的所有文件夹
-  file.getContents("./uploads",function(err,files){
+  file.getContents("uploads",function(err,files){
     if(err){
       console.log(err);
       res.send("<h1>网络错误</h1>");
@@ -18,11 +18,34 @@ router.get("/show", function(req,res){
     res.render("index",{dirs: files});
   });
 })
-
-
+// 处理get请求: /dir/mkdir , 跳转到新建文件夹页面
+.get("/mkdir",function(req,res){
+  res.render("mkdir");
+})
+// 处理post的请求: /dir/mkdir
+.post("/mkdir",function(req,res){
+  
+})
+// get请求,/dir/check, 检查相册名称是否存在
+.get("/check",function(req,res){
+  // 拿参数
+  var dirName = req.query.dirName;
+  // 拿uploads下的所有文件夹
+  file.getContents("uploads",function(err,files){
+    if(err){
+      console.log(err);
+      res.send({code:1,msg:"读取相册出错"});
+      return ;
+    }
+    // 将files返回
+    res.send({code:0, dirs: files});
+  });
+});
 
 
 
 
 // 暴露路由
 module.exports = router;
+
+

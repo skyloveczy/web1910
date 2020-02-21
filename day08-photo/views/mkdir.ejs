@@ -36,16 +36,34 @@
     </div>
   </nav>
 
-  <div class="photo">
-    <% for(var i=0;i<dirs.length;i++){ %>
-      <div class="pics">
-        <a href="/pic/show?dirName=<%= dirs[i] %>">
-          <img src="/img/1.jpg" alt="" width="150px">
-          <h3><%= dirs[i] %></h3>
-        </a>
-      </div>
-    <% } %>
-  </div>
-
+  <form action="/dir/mkdir" method="POST" onsubmit="return check()">
+    输入相册名称:
+    <input type="text" name="dirName">
+    <input type="submit" >
+  </form>
+  <script src="/js/jquery.min.js"></script>
+  <script>
+    function check(){
+      // 获取相册名称
+      var dirName = $("input[type='text']").val();
+      // 发送Ajax检查相册名称是否存在
+      $.ajax({
+        url: "/dir/check",
+        data: {dirName: dirName},
+        async: false,
+        success: function(result){
+          if(result.code==1){
+            alert("111")
+          };
+          if(result.code==0){
+            console.log(result.dirs);
+          };
+          return false;
+        }
+      })
+      
+    }
+  </script>
+  
 </body>
 </html>
