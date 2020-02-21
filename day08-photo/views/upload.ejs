@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>上传图片</title>
+  <link rel="stylesheet" href="/css/bootstrap.css">
+  <style>
+    .photo{
+      padding-top: 40px;
+      padding-left: 200px;
+      padding-right: 200px;
+    }
+    .pics{
+      margin: 30px;
+      float: left;
+      /* border: 1px solid red; */
+    }
+    h3{
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">相册</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/dir/mkdir">新建相册</a></li>
+          <li><a href="/pic/upload">上传图片</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <form action="/pic/upload" method="POST" enctype="multipart/form-data">
+    <h2>请选择相册</h2>
+    <select name="dirName">
+      <% for(var i=0;i<dirs.length;i++){ %>
+        <option value="<%= dirs[i] %>"><%= dirs[i] %></option>
+      <% } %>
+    </select>
+    <h2>选择图片</h2>
+    <input type="file" name="pic"><br>
+    <input type="submit">
+  </form>
+  
+</body>
+</html>
