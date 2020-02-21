@@ -43,9 +43,18 @@
           <img src="/img/1.jpg" alt="" width="150px">
           <h3><%= dirs[i] %></h3>
         </a>
+        <a href="#" onclick="del('<%= dirs[i] %>')">删除</a>
       </div>
     <% } %>
   </div>
-
+  <script>
+    function del(dirName){
+      var f = confirm("是否确定要删除相册 "+dirName+" ?");
+      if(f){
+        // 确定删除,向后台发送请求
+        location.href = "/dir/del/"+dirName;
+      }
+    }
+  </script>
 </body>
 </html>

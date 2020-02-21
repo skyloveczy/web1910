@@ -36,32 +36,52 @@
     </div>
   </nav>
 
-  <form action="/dir/mkdir" method="POST" onsubmit="return check()">
+  <form action="/dir/mkdir" method="POST" onsubmit="return canSend()">
     输入相册名称:
-    <input type="text" name="dirName">
+    <input type="text" name="dirName" oninput="check()"><span id="msg"></span><br>
     <input type="submit" >
   </form>
   <script src="/js/jquery.min.js"></script>
   <script>
+    var f = false;// 标记表单是否可以发送
     function check(){
       // 获取相册名称
-      var dirName = $("input[type='text']").val();
+      var dirName = $("input[type='text']").val().trim();
       // 发送Ajax检查相册名称是否存在
       $.ajax({
         url: "/dir/check",
         data: {dirName: dirName},
-        async: false,
         success: function(result){
           if(result.code==1){
-            alert("111")
-          };
+            f = false; // 不可用
+            $("#msg").html("正在查询相册名是否可用");
+            return;
+          }
           if(result.code==0){
-            console.log(result.dirs);
-          };
-          return false;
+            var res = result.res;
+            if(res){
+              // 存在
+              f = false; // 不可用
+              $("#msg").html("相册名已存在");
+            }else{
+              f = true; // 可用
+              $("#msg").html("相册名可用");
+            }
+          }
         }
       })
       
+    }
+    
+    function canSend(){
+      var dirName = $("input[type='text']").val().trim();
+      if(!dirName){
+        // 没有值,或值为空字符串
+        $("#msg").html("相册名不可为空");
+        return false;
+      }
+      // 判断f
+      return f;
     }
   </script>
   
