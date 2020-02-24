@@ -32,3 +32,8 @@ app.use("/dir",dir);
 
 // 图片相关的请求
 app.use("/pic",pic);
+
+// 处理错误的请求
+app.use(function(req,res){
+  res.send("<h1>请求地址错误</h1><a href='/'>点击返回</a>");
+})
