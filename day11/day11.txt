@@ -1,0 +1,35 @@
+试图工具mongoVUE的使用
+
+
+使用NodeJS连接操作数据库
+  01.js----使用nodejs连接数据库
+  1. 引入模块,获取mongoClient类
+    var mongoClient = require("mongodb").MongoClient;
+  2. 创建客户端对象
+    var client = new mongoClient(url,{option});
+  3. 连接数据库
+    client.connect(function(err){
+      4. 获取数据库名称
+      var db = client.db("数据库名");
+      5. 获取数据库中的集合名称
+      var collection = db.collection("集合名");
+      6. 对集合进行增删改查的操作
+    });
+
+  增:
+    collection.insertOne({},function(err,result){})
+    collection.insertMany([{},{}],function(err,result){})
+  删:
+    collection.deleteOne({条件},function(err,result){})
+    collection.deleteMany({条件},function(err,result){})
+  改:
+    collection.updateOne({条件},{$set:{数据}},function(err,raw){})
+    collection.updateMany({条件},{$set:{数据}},function(err,raw){})
+  查:
+    collection.find({条件}).toArray(function(err,docs){})
+
+
+案例:
+  用户在表单中输入数据,服务器接收数据保存进数据库
+
+

@@ -184,6 +184,10 @@ mongodb数据库的使用
 
     db.student.find({age: {$not:{$gt:22}} });
 
+    查询年龄不是22岁的信息
+    db.student.find({age:{$not:{$eq:22}}});
+    db.student.find({$or:[{age:{$gt:22}},{age:{$lt:22}}]});
+
 
   4. 既不也不
     $nor
