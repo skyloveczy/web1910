@@ -1,4 +1,4 @@
-试图工具mongoVUE的使用
+视图工具mongoVUE的使用
 
 
 使用NodeJS连接操作数据库

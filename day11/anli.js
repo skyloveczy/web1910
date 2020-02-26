@@ -25,6 +25,7 @@ app.post("/tijiao",function(req,res){
       if(err){
         console.log(err);
         res.send("保存数据失败");
+        client.close(); // 关闭连接
         return ;
       }
       if(result.result.n==0){
@@ -32,6 +33,7 @@ app.post("/tijiao",function(req,res){
       }else{
         res.send("保存成功");
       }
+      client.close(); // 关闭连接
     });
   })
 });
