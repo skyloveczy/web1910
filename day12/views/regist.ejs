@@ -4,14 +4,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="/jquery.min.js"></script>
 </head>
 <body>
   <h1>注册</h1>
-  <form action="/regist" method="post">
-    username: <input type="text" name="username"><br>
+  <form action="/regist" method="post" onsubmit="return send()">
+    username: <input type="text" name="username"><span></span><br>
     passowrd: <input type="text" name="password"><br>
     <input type="submit">
   </form>
   点击跳转<a href="/login">登录</a>页面
+  <script>
+    var canSend = false;
+    $("input[name='username']").on("input",function(){
+      var username = $(this).val().trim();
+      // 发送Ajax请求,检查数据库中是否有该用户名
+      $.ajax({
+        url:'/check',
+        data: {username:username},
+        success: function(result){
+          if(result.isOK){
+            $("span").html("用户名可以使用").css("color","blue");
+            canSend = true;
+          }else{
+            $("span").html("用户名已存在").css("color","red");
+            canSend = false;
+          }
+        }
+      })
+    })
+    
+    function send(){
+      if(!canSend){
+        alert("用户名已存在");
+      }
+      return canSend;
+    }
+
+  </script>
 </body>
 </html>
