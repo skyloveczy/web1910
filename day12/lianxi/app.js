@@ -1,6 +1,7 @@
 var express = require("express");
 var app = express();
 var bdParser = require("body-parser");
+var fs = require("fs");
 var mongoClient = require("mongodb").MongoClient;
 var objectId = require("mongodb").ObjectID;
 const uri = "mongodb://localhost:27017";
@@ -84,11 +85,61 @@ app.post("/add",function(req,res){
           }
           // 成功,跳转到首页
           res.redirect("/");
+          client.close();
         });
         return ;
       }
       // 商品不存在,新建一条商品目录
-
+      doc = {name:name,price:price,number:number};
+      // 获取最新id
+      var id = Number(fs.readFileSync("./number.txt"));
+      doc.id = id; // 将id绑定到数据中
+      // 将id自增,重新保存进number.txt,方便下次使用
+      id++;
+      fs.writeFileSync("number.txt",id);
+      // 保存数据到数据库
+      collection.insertOne(doc,function(err,result){
+        if(err){
+          consnole.log(err);
+          res.send("添加数据失败");
+          client.close();
+          return;
+        }
+        res.redirect("/");
+        client.close();
+      });
     });
   });
 })
+
+// get / del请求,删除某条数据
+app.get("/del",function(req,res){
+  // 获取参数
+  var _id = req.query._id; // 字符串
+  // 将字符串转换为ObjectId类型
+  _id = objectId(_id);
+  var client = new mongoClient(uri,opt);
+  client.connect(function(err){
+    if(err){
+      console.log(err);
+      res.send({code:1,msg:"连接数据库失败"});
+      return ;
+    }
+    // 删除数据
+    var collection = client.db("web").collection("shop");
+    collection.deleteOne({_id:_id},function(err,result){
+      if(err){
+        console.log(err);
+        res.send({code:2,msg:"删除失败"});
+        client.close();
+        return ;
+      }
+      if(result.result.n==0){
+        res.send({code:3,msg:"数据库不存在此数据"});
+      }else{
+        res.send({code:0,msg:"删除成功"});
+      }
+      client.close();
+    });
+  });
+});

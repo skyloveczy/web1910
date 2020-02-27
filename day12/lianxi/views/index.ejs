@@ -17,13 +17,16 @@
 </head>
 <body>
   <table cellspacing="0">
-    <tr>
-      <td>编号</td>
-      <td>名称</td>
-      <td>单价</td>
-      <td>数量</td>
-      <td>操作</td>
-    </tr>
+    <thead>
+      <tr>
+        <td>编号</td>
+        <td>名称</td>
+        <td>单价</td>
+        <td>数量</td>
+        <td>操作</td>
+      </tr>
+    </thead>
+    <tbody>
     <% for(var i=0;i<shops.length;i++){ %>
       <tr>
         <td><%= shops[i].id %></td>
@@ -31,14 +34,58 @@
         <td><%= shops[i].price %></td>
         <td><%= shops[i].number %></td>
         <td>
-          <a href="#">修改</a>
-          <a href="#">删除</a>
+          <a href="#" onclick="modify(this,<%= i %>)">修改</a>
+          <a href="#" onclick="del('<%= shops[i]._id %>',this)">删除</a>
         </td>
       </tr>
     <% } %>
+  </tbody>
   </table>
   <a href="/add">进货</a>
   
   <script src="/jquery.min.js"></script>
+  <script>
+    var oldPrice; // 上一次点击但未修改的值
+    var oldNumber; // 上一次
+    var idx = -1; // 上一次点击的tr对应的下标
+    function modify(target,i){
+      if(idx!=-1){
+        var tr = $("tbody>tr")[idx]; // 取上一次被点击的tr
+        var tds = $(tr).children(); // tr下的所有td
+        tds[2].innerHTML = oldPrice; // 将上一次价格td还原为数值
+        tds[3].innerHTML = oldNumber; // 存货还原
+      }
+      idx = i;
+      var $price = $(target).parent().prev().prev();
+      var $number = $(target).parent().prev();
+      oldPrice = $price.html();
+      oldNumber = $number.html();
+      var input = '<input type="text" size="4" placeholder="777" >';
+      $price.html(input);
+      $number.html(input);
+    }
+    
+    function del(id,target){
+      var f = confirm("是否要删除此数据?");
+      if(f){
+        $.ajax({
+          url: "/del?_id="+id,
+          success: function(result){
+            var code = result.code;
+            console.log(111);
+            if(code!=0){
+              alert("删除失败");
+            }else{
+              alert("删除成功");
+              $(target).parent().parent().remove();
+            }
+          }
+        })
+      }
+    }
+
+  </script>
+
+
 </body>
 </html>
